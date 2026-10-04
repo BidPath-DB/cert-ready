@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('govcon-u');
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{article.data.title} | GovCon U</title>
+  </head>
+  <body>
+    <main style="max-width: 780px; margin: 2rem auto; padding: 0 1rem; font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7;">
+      <p><a href="/govcon-u/">← Back to GovCon U</a></p>
+      <h1>{article.data.title}</h1>
+      <hr />
+      <article>
+        <Content />
+      </article>
+    </main>
+  </body>
+</html>

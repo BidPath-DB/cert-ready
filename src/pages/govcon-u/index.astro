@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('govcon-u')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GovCon U | Free Government Contracting Guides</title>
+  </head>
+  <body>
+    <main style="max-width: 780px; margin: 2rem auto; padding: 0 1rem; font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7;">
+      <h1>GovCon U</h1>
+      <p>Free guides on government contracting — SLED, federal, certifications, and more.</p>
+      <hr />
+      <ul>
+        {articles.map((article) => (
+          <li style="margin-bottom: 1rem;">
+            <a href={`/govcon-u/${article.slug}/`} style="font-size: 1.15rem; font-weight: 600;">
+              {article.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>
