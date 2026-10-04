@@ -20,7 +20,7 @@ const articles = (await getCollection('govcon-u')).sort((a, b) =>
       <ul>
         {articles.map((article) => (
           <li style="margin-bottom: 1rem;">
-            <a href={`/govcon-u/${article.slug}/`} style="font-size: 1.15rem; font-weight: 600;">
+            <a href={`/govcon-u/${article.id}/`} style="font-size: 1.15rem; font-weight: 600;">
               {article.data.title}
             </a>
           </li>
